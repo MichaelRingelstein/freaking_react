@@ -1,32 +1,37 @@
 import { useState } from "react";
 import "./App.css";
-import AddUser from "./components/AddUser/AddUser";
-import UsersList from "./components/AddUser/UsersList";
+import AddMission from "./components/AddMission/AddMission";
+import MissionList from "./components/AddMission/MissionList";
+import MissionHeader from "./components/AddMission/MissionHeader";
 
 function App() {
-  const [usersList, setUsersList] = useState([]);
+  const [missionList, setMissionList] = useState([]);
 
-  const addUserHanlder = (uName, uAge) => {
-    setUsersList((prevUsersList) => {
-      return [
-        ...prevUsersList,
-        { name: uName, age: uAge, id: Math.random().toString() },
-      ];
+  const addMissionHanlder = (...newMission) => {
+    //console.log("Hello" + {...newMission})
+    setMissionList((prevMissionList) => {
+      return [...prevMissionList, newMission];
     });
-    console.log(usersList.length);
+    console.log(missionList);
   };
 
   return (
-    <div className="grid auto-rows-auto gap-4 place-content-center justify-items-center">
-      <div>
-        <AddUser onAdd={addUserHanlder} />
+    <>
+    <h1>Create dispatch missions</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 place-items-center px-16">
+        <div className="w-min">
+          <AddMission onAdd={addMissionHanlder} />
+        </div>
+        <div className="auto-rows-auto gap-4 place-self-start w-min">
+            <MissionHeader></MissionHeader>
+            {missionList.length > 0 && (
+              <div>
+                <MissionList missionList={missionList}></MissionList>
+              </div>
+            )}
+        </div>
       </div>
-      {(usersList.length > 0) &&
-        <div>
-        <UsersList usersList={usersList}></UsersList>
-      </div>
-      }
-    </div>
+    </>
   );
 }
 
