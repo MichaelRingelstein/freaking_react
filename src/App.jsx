@@ -17,18 +17,17 @@ function App() {
 
   return (
     <>
-    <h1>Create dispatch missions</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 place-items-center px-16">
-        <div className="w-min">
-          <AddMission onAdd={addMissionHanlder} />
-        </div>
-        <div className="auto-rows-auto gap-4 place-self-start w-min">
+      <div className="grid grid-cols-1 gap-4 place-content-center max-w-screen-lg mx-auto p-8 xl:px-0 md:grid-cols-2 md:gap-8">
+        <div className="auto-rows-auto gap-4 place-self-start w-full">
             <MissionHeader></MissionHeader>
             {missionList.length > 0 && (
-              <div>
+              <div className="w-full">
                 <MissionList missionList={missionList}></MissionList>
               </div>
             )}
+        </div>
+        <div className="">
+          <AddMission onAdd={addMissionHanlder} />
         </div>
       </div>
     </>
