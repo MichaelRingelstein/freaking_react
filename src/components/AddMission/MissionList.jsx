@@ -8,7 +8,7 @@ const MissionList = (props) => {
     
       <ul>
         {props.missionList.map((mission) => (
-          <Card className="w-96">
+          <Card className="">
           <li key={mission[0].id}>
             <div>
               Type : {mission[0].missionType} 

@@ -5,8 +5,8 @@ import Card from "../UI/Card";
 const MissionHeader = (props) => {
   return (
     <>
-      <Card className="w-full bg-blue-300 px-8">
-        <div className="grid grid-cols-2 gap-8">
+      <Card className="bg-red-300">
+        <div className="grid gap-8 grid-cols-1">
           <div>
             <label>Créneau de tournée</label>
             <input
