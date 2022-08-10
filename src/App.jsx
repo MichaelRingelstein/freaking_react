@@ -1,35 +1,32 @@
 import { useState } from "react";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import "./App.css";
-import AddMission from "./components/AddMission/AddMission";
-import MissionList from "./components/AddMission/MissionList";
-import MissionHeader from "./components/AddMission/MissionHeader";
+import ShiftMissionList from "./components/MissionAnswer/ShiftMissionList";
+import Button from "./components/UI/Button";
 
 function App() {
-  const [missionList, setMissionList] = useState([]);
-
-  const addMissionHanlder = (...newMission) => {
-    //console.log("Hello" + {...newMission})
-    setMissionList((prevMissionList) => {
-      return [...prevMissionList, newMission];
-    });
-    console.log(missionList);
-  };
+  const items = [
+    { id: 1, name: "test" },
+    { id: 2, name: "test" },
+  ];
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 place-content-center max-w-screen-lg mx-auto p-8 xl:px-0 md:grid-cols-2 md:gap-8">
-        <div className="auto-rows-auto gap-4 place-self-start w-full">
-            <MissionHeader></MissionHeader>
-            {missionList.length > 0 && (
-              <div className="w-full">
-                <MissionList missionList={missionList}></MissionList>
-              </div>
-            )}
-        </div>
-        <div className="">
-          <AddMission onAdd={addMissionHanlder} />
-        </div>
+      <div className="flex justify-center">
+        <ul role="list" className="space-y-3 w-3/4 lg:w-1/2">
+          {items.map((item) => (
+            <li
+              key={item.id}
+              className="bg-white shadow overflow-hidden rounded-md px-6 py-4"
+            >
+              {/* Your content */}
+            </li>
+          ))}
+        </ul>
       </div>
+      <Button>
+        <NavLink to="create-mission">Créer une mission</NavLink>
+      </Button>
     </>
   );
 }

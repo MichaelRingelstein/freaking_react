@@ -5,19 +5,26 @@ const Input = (props) => {
   if (props.requiredField) {
     required = { required: "required" };
   }
-  console.log({ ...required });
   return (
     <>
+    <div className="relative">
+    <label
+        htmlFor="name"
+        className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
+      >
+         {props.labelContent}
+      </label>
       <input
         type={props.type}
         name={props.name}
-        className={`w-full border-b border-gray-200 focus:outline-none focus:border-blue-400 ${props.className}`}
+        className={`mt-2 py-2 px-3 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md `}
         value={props.value}
         onChange={props.onChange}
         {...required}
-      >
+        >
         {props.children}
       </input>
+        </div>
     </>
   );
 };

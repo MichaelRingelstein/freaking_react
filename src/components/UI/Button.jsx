@@ -3,7 +3,7 @@ import React from "react";
 const Button = (props) => {
   return (
     <button
-      className="bg-sky-600 hover:bg-sky-700 text-white px-8 py-2 rounded-full w-40 justify-self-center"
+      className="inline-flex items-center px-5 py-2 border border-transparent text-base font-medium rounded-xl shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       type={props.type || "button"}
       onClick={props.onClick}
     >
