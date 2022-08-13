@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
+import { useNavigate } from "react-router-dom";
 
 const ShiftSummary = (props) => {
+  let navigate = useNavigate();
+
   const shiftDateChangeHandler = (event) => {
     props.shiftInformationHandler({
       shift_date: event.target.value,
@@ -21,6 +24,7 @@ const ShiftSummary = (props) => {
   const shiftInformationFormHandle = (event) => {
     event.preventDefault();
     props.sendMissionHandler();
+    navigate("/", { replace: true })
   };
 
   const deleteMision = (event) => {

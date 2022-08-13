@@ -4,23 +4,12 @@ import Card from "../UI/Card";
 import Input from "../UI/Input";
 import Dropdown from "../UI/Dropdown";
 import "../../App.css";
-import axios from "axios";
+import instanceAxios from "../../api/index"
 
 const AddMission = (props) => {
-  const missionTypes = [
-    { id: 1, name: "Rebalancing" },
-    { id: 2, name: "Clusters" },
-    { id: 3, name: "Towing" },
-    { id: 4, name: "Impoundment dispatch" },
-    { id: 5, name: "Out of zone towing" },
-    { id: 6, name: "Internal Dispatch" },
-  ];
-
-  const instanceAxios = axios.create({
-    baseURL: "http://localhost:3000/data",
-  });
+  
   const [newMission, setNewMission] = useState({
-    missionType: missionTypes[0],
+    missionType: "",
     quantity: "",
     vins: "",
     pickUp: "",
@@ -33,7 +22,7 @@ const AddMission = (props) => {
     event.preventDefault();
     props.onAdd(newMission);
     setNewMission({
-      missionType: missionTypes[0],
+      missionType: "",
       quantity: "",
       vins: "",
       pickUp: "",
@@ -68,18 +57,13 @@ const AddMission = (props) => {
   const [missions, setMissions] = useState("");
   useEffect(() => {
     instanceAxios.get("mission_type.json").then((response) => {
-      console.log(response.data.missionTypes);
+      //console.log(response.data.missionTypes);
       setMissions(response.data.missionTypes);
+      setNewMission({ ...newMission, missionType: response.data.missionTypes[0]})
     });
   }, [props]);
 
-  useEffect(() => {
-    Array.isArray(missions)
-      ? missions.map((item) => {
-          console.log(item);
-        })
-      : console.log("not an array yet");
-  }, [missions]);
+
 
   return (
     <div>
@@ -93,13 +77,17 @@ const AddMission = (props) => {
           <div className="grid grid-cols-6 gap-4 px-4 py-5 sm:p-6">
             <div className="col-span-6 sm:col-span-4">
               <div>
-                <Dropdown
-                  label="Mission type"
-                  onChange={missionSelectedChangeHandler}
-                  list={missions}
-                  selected={newMission.missionType}
-                  requiredField={true}
-                />
+                {Array.isArray(missions) ? (
+                  <Dropdown
+                    label="Mission type"
+                    onChange={missionSelectedChangeHandler}
+                    list={missions}
+                    selected={newMission.missionType}
+                    requiredField={true}
+                  />
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             <div className="col-span-6 sm:col-span-3">

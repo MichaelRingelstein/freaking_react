@@ -1,32 +1,32 @@
 import React from "react";
-
 import Card from "../UI/Card";
-import Button from "../UI/Button";
 
 const ShiftMissionList = (props) => {
+  console.log(props.shiftInformation)
+  console.log(props.shiftInformation.shift_date)
   return (
     <>
       <div className="grid auto-rows-min w-full">
         <div className="pb-3 sm:pb-2">
           <h1 className="text-xl font-bold leading-6 text-black ">
-            Shift summary
+            Shift detail
           </h1>
         </div>
         <Card className="">
           <div className="grid grid-cols-6 gap-4 px-4 py-5 sm:p-6 bg-slate-100">
             <div className="col-span-6 lg:col-span-3">
-              {props.shiftInformation.shift_dispatcher}
+              {props.shiftInformation.shift_date}
             </div>
             <div className="col-span-6 lg:col-span-3">
-              {props.shiftInformation.shift_date}
+              {props.shiftInformation.shift_dispatcher}
             </div>
           </div>
 
-          {props.missionList.length > 0 && (
+          {props.shiftInformation.mission_list.length > 0 && (
             <a href="#">
               <div className="py-5 px-4">
                 <ul className="-my-5 divide-y divide-gray-200">
-                  {props.missionList.map((mission, index) => (
+                  {props.shiftInformation.mission_list.map((mission, index) => (
                     <li key={index} className="py-5">
                       <div className="grid grid-cols-6">
                         <div className="min-w-0 col-span-5">

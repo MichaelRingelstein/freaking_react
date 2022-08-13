@@ -1,33 +1,18 @@
-import { useState } from "react";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import ShiftMissionList from "./components/MissionAnswer/ShiftMissionList";
-import Button from "./components/UI/Button";
+import CreateMission from "./Pages/CreateMission";
+import ShiftDetail from "./Pages/ShiftDetail";
+import ShiftList from "./Pages/ShiftList";
 
 function App() {
-  const items = [
-    { id: 1, name: "test" },
-    { id: 2, name: "test" },
-  ];
-
   return (
-    <>
-      <div className="flex justify-center">
-        <ul role="list" className="space-y-3 w-3/4 lg:w-1/2">
-          {items.map((item) => (
-            <li
-              key={item.id}
-              className="bg-white shadow overflow-hidden rounded-md px-6 py-4"
-            >
-              {/* Your content */}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <Button>
-        <NavLink to="create-mission">Créer une mission</NavLink>
-      </Button>
-    </>
+    <div>
+      <Routes>
+        <Route path="/" element={<ShiftList />} />
+        <Route path="shift-detail/:shiftId" element={<ShiftDetail />}></Route>
+        <Route path="create-mission" element={<CreateMission />}></Route>
+      </Routes>
+    </div>
   );
 }
 
