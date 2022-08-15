@@ -1,0 +1,13 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g opacity="0.1">
+<path opacity="0.1" d="M96 24V96H24V24H96ZM97.2 22.8H96H24H22.8V24V96V97.2H24H96H97.2V96V24V22.8Z" fill="#FC4E52"/>
+</g>
+<path d="M70 120H50C22.4 120 0 97.6 0 70V50C0 22.4 22.4 0 50 0H70C97.6 0 120 22.4 120 50V70C120 97.6 97.6 120 70 120Z" fill="#FFA0A1"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M96 90H24V86H96V90Z" fill="white"/>
+<path d="M65 60L62.1 31H57.8L55 60L42 86H51.7L52.3 83.8C53.3 80.4 56.4 78 60 78C63.6 78 66.7 80.3 67.7 83.8L68.4 86H78L65 60Z" fill="#156FFB"/>
+<path d="M65.8 58H54.1V62H65.8V58Z" fill="black"/>
+<path d="M56 28C56 30.2 57.8 32 60 32C62.2 32 64 30.2 64 28H56Z" fill="#156FFB"/>
+<path d="M60 30C58.9 30 58 29.1 58 28V26C58 24.9 58.9 24 60 24C61.1 24 62 24.9 62 26V28C62 29.1 61.1 30 60 30Z" fill="#156FFB"/>
+<path d="M55.7 72H64.3L62.5 65.9C62.2 64.8 61.2 64 60 64C58.8 64 57.8 64.8 57.4 65.9L55.7 72Z" fill="#FFA0A1"/>
+<path d="M73 72H47V76H73V72Z" fill="black"/>
+</svg>

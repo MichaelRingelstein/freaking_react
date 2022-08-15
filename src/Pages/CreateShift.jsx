@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import AddMission from "../components/MissionCreation/AddMission";
 import ShiftSummary from "../components/MissionCreation/ShiftSummary";
+import NavBar from "../components/UI/Navbar";
 
-const CreateMission = () => {
-
+const CreateShift = () => {
   const [missionList, setMissionList] = useState([
     {
       missionType: { id: 1, name: "Rebalancing" },
@@ -69,7 +69,8 @@ const CreateMission = () => {
   };
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 place-content-center max-w-screen-lg mx-auto p-8 xl:px-0 md:grid-cols-2 md:gap-8">
+      <NavBar></NavBar>
+      <div className="grid grid-cols-1 gap-4 content-center mx-auto py-8 px-4 xl:px-0 md:grid-cols-2 md:gap-8 w-3/4 xl:w-2/3">
         <AddMission onAdd={addMissionHanlder} />
         <ShiftSummary
           missionList={missionList}
@@ -82,4 +83,4 @@ const CreateMission = () => {
     </>
   );
 };
-export default CreateMission;
+export default CreateShift;

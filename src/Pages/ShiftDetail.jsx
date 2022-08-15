@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ShiftMissionList from "../components/MissionAnswer/ShiftMissionList";
+import instanceAxios from "../api";
+import NavBar from "../components/UI/Navbar";
 
 const shiftData = {
   shift_date: "12/08/2021 23:00:00",
@@ -36,13 +38,37 @@ const shiftData = {
   ],
 };
 
-const ShiftDetail = () => {
-  const params = useParams();
-  console.log(params.shiftId);
+const ShiftDetail = (props) => {
+const params = useParams()
+console.log(params.shiftId)
+  console.log("start rendering");
+  const [missions, setMissions] = useState([]);
+  const [generalInformation , setGeneralInformation] = useState(null);
+  useEffect(() => {
+    instanceAxios.get("missions.json").then((response) => {
+      setMissions(response.data)
+    });
+  }, []);
+
+  useEffect(() => {
+    instanceAxios.get("shifts.json").then((response) => {
+      response.data.map((shift, index)=>{
+        if (shift.id == params.shiftId) {
+          console.log(shift)
+          setGeneralInformation(shift)
+        }
+      })
+    });
+  }, []);
+
+  console.log(missions);
+  console.log(generalInformation)
+
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 place-content-center mx-auto p-8 xl:px-0 max-w-lg">
-        <ShiftMissionList shiftInformation={shiftData}></ShiftMissionList>
+    <NavBar></NavBar>
+      <div className="flex justify-center gap-4 p-8 xl:px-0">
+        <ShiftMissionList generalInformation={generalInformation} missions={missions}></ShiftMissionList>
       </div>
     </>
   );

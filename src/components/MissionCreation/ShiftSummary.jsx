@@ -41,7 +41,7 @@ const ShiftSummary = (props) => {
       <Card className="">
         <form onSubmit={shiftInformationFormHandle}>
           <div className="grid grid-cols-6 gap-4 px-4 py-5 sm:p-6">
-            <div className="col-span-6 lg:col-span-3">
+            <div className="col-span-6 xl:col-span-3">
               <Input
                 labelContent="Créneau"
                 type="datetime-local"
@@ -52,7 +52,7 @@ const ShiftSummary = (props) => {
                 onChange={shiftDateChangeHandler}
               ></Input>
             </div>
-            <div className="col-span-6 lg:col-span-3">
+            <div className="col-span-6 xl:col-span-3">
               <Input
                 labelContent="Dispatcher name"
                 type="text"

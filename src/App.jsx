@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import CreateMission from "./Pages/CreateMission";
+import CreateShift from "./Pages/CreateShift";
+import ResponsePage from "./Pages/ResponsePage";
 import ShiftDetail from "./Pages/ShiftDetail";
 import ShiftList from "./Pages/ShiftList";
 
@@ -9,8 +10,9 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<ShiftList />} />
-        <Route path="shift-detail/:shiftId" element={<ShiftDetail />}></Route>
-        <Route path="create-mission" element={<CreateMission />}></Route>
+        <Route path="shift/:shiftId" element={<ShiftDetail />}></Route>
+        <Route path="create-mission" element={<CreateShift />}></Route>
+        <Route path="answer-mission/:missionId" element={<ResponsePage />} />
       </Routes>
     </div>
   );

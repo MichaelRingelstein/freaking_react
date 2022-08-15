@@ -1,33 +1,12 @@
-{
-    "shift_date": "test",
-    "shift_dispatcher": "test",
-    "mission_list":[
-    {
-        "missionType": { "id": 1, "name": "Rebalancing" },
-        "quantity": "4",
-        "vins": "554, 443, 234, 1898",
-        "pickUp": "Rue de la paix",
-        "dropOff": "Rue de la guerre",
-        "fleet": "dispatch",
-        "comment": "déplacer ces scooters"
-      },
-      {
-        "missionType": { "id": 2, "name": "blabla" },
-        "quantity": "4",
-        "vins": "554, 443, 234, 1898",
-        "pickUp": "Rue de la paix",
-        "dropOff": "Rue de la guerre",
-        "fleet": "dispatch",
-        "comment": "déplacer ces scooters"
-      },
-      {
-        "missionType": { "id": 3, "name": "zefr" },
-        "quantity": "4",
-        "vins": "554, 443, 234, 1898",
-        "pickUp": "Rue de la paix",
-        "dropOff": "Rue de la guerre",
-        "fleet": "dispatch",
-        "comment": "déplacer ces scooters"
-      }
-    ]
-}
+[
+  {
+    "id": 1,
+    "shift_date": "today",
+    "shift_dispatcher": "Ahmed"
+  },
+  {
+    "id": 2,
+    "shift_date": "tomorrow",
+    "shift_dispatcher": "Karam"
+  }
+]
