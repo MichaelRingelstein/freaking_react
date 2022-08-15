@@ -21,12 +21,12 @@ const ShiftList = () => {
   return (
     <>
       <NavBar></NavBar>
-      <div className="flex flex-col p-8">
+      <div className="flex flex-col py-8 sm:px-8 xl:px-0">
         <div className="inline-flex justify-center">
-            <div className="w-3/4 lg:w-1/2 text-xl font-bold">Shifts list</div>
+            <div className="w-5/6 max-w-6xl sm:w-3/4 lg:w-1/2 text-xl font-bold">Shifts list</div>
         </div>
         <div className="inline-flex justify-center">
-          <ul className="gap-4 w-3/4 lg:w-1/2">
+          <ul className="gap-4 w-5/6 max-w-6xl sm:w-3/4 lg:w-1/2">
             {shifts.map((element, index) => (
               <NavLink to={`shift/${element.id}`} className="">
                 <li

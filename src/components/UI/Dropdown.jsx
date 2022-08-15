@@ -20,11 +20,11 @@ const Dropdown = (props) => {
       {({ open }) => (
         <>
           <div className="relative">
-            <label className="absolute z-10 -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">
+            <label className="absolute z-10 -top-2 left-2 first-letter:inline-block px-1 bg-white text-xs font-medium text-gray-900">
               {props.label}
             </label>
-            <div className="mt-1 relative">
-              <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm">
+            <div className="relative">
+              <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                 <span className="block truncate">{selected.name}</span>
                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                   <SelectorIcon
@@ -44,16 +44,16 @@ const Dropdown = (props) => {
                 leaveTo="opacity-0"
               >
                 <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none text-sm">
-                  {props.list.map((person) => (
+                  {props.list.map((element) => (
                     <Listbox.Option
-                      key={person.id}
+                      key={element.id}
                       className={({ active }) =>
                         classNames(
                           active ? "text-white bg-blue-600" : "text-gray-900",
                           "cursor-default select-none relative py-2 pl-3 pr-9"
                         )
                       }
-                      value={person}
+                      value={element}
                     >
                       {({ selected, active }) => (
                         <>
@@ -63,7 +63,7 @@ const Dropdown = (props) => {
                               "block truncate"
                             )}
                           >
-                            {person.name}
+                            {element.name}
                           </span>
 
                           {selected ? (

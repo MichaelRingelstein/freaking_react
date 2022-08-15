@@ -4,13 +4,13 @@ import Card from "../UI/Card";
 
 const ShiftMissionList = (props) => {
   console.log(props.missions);
-  let navigate = useNavigate();
+  //let navigate = useNavigate();
 
-  const handleClick = (event) => {
-    event.preventDefault();
-    console.log(event.target.value);
-    navigate("/answer-mission/" + event.target.value, { replace: true });
-  };
+  // const handleClick = (event) => {
+  //   event.preventDefault();
+  //   console.log(event.target.value);
+  //   navigate("/answer-mission/" + event.target.value, { replace: true });
+  // };
 
   const translateStatus = (statusId) => {
     let label = ""
@@ -34,7 +34,7 @@ const ShiftMissionList = (props) => {
 
   return (
     <>
-      <div className="w-3/4 lg:w-1/2 inline-flex justify-center flex-col">
+      <div className="w-5/6 max-w-6xl sm:w-3/4 lg:w-1/2 inline-flex justify-center flex-col">
         <div className="pb-3 sm:pb-2">
           <h1 className="text-xl font-bold leading-6 text-black ">
             Shift detail
@@ -53,12 +53,13 @@ const ShiftMissionList = (props) => {
                 {props.missions.map((mission, index) => (
                   //<NavLink to={`answer-mission/${mission.id}`}>
                   <li key={mission.id} className="py-5">
+                    <NavLink to={`/answer-mission/${mission.id}`}>
                     <div className="group relative grid grid-cols-6">
-                      <button
+                      {/* <button
                         className="absolute w-full h-full"
                         onClick={handleClick}
                         value={mission.id}
-                      />
+                      /> */}
                       <div className="min-w-0 col-span-5 aria-hidden">
                         <p className="text-sm font-bold pb-2 uppercase group-hover:text-gray-500">
                           Mission {index + 1}
@@ -112,6 +113,7 @@ const ShiftMissionList = (props) => {
                         </svg>
                       </div>
                     </div>
+                    </NavLink>
                   </li>
                   //</NavLink>
                 ))}

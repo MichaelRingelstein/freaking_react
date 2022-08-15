@@ -13,6 +13,7 @@
     "react": "^18.2.0",
     "react-axios": "^2.0.6",
     "react-dom": "^18.2.0",
+    "react-html5-camera-photo": "^1.5.10",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.7",
@@ -47,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-html5-camera-photo": "^1.5.1",
     "autoprefixer": "^10.4.2",
     "concurrently": "^6.4.0",
     "postcss": "^8.4.6",

@@ -70,7 +70,7 @@ const CreateShift = () => {
   return (
     <>
       <NavBar></NavBar>
-      <div className="grid grid-cols-1 gap-4 content-center mx-auto py-8 px-4 xl:px-0 md:grid-cols-2 md:gap-8 w-3/4 xl:w-2/3">
+      <div className="grid grid-cols-1 gap-4 content-center mx-auto py-8 sm:px-8 xl:px-0 md:grid-cols-2 md:gap-8 w-5/6 sm:w-3/4 xl:w-1/2">
         <AddMission onAdd={addMissionHanlder} />
         <ShiftSummary
           missionList={missionList}
