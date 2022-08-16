@@ -17,13 +17,14 @@ const shifts = [
 ];
 
 const ShiftList = () => {
-
   return (
     <>
       <NavBar></NavBar>
       <div className="flex flex-col py-8 sm:px-8 xl:px-0">
         <div className="inline-flex justify-center">
-            <div className="w-5/6 max-w-6xl sm:w-3/4 lg:w-1/2 text-xl font-bold">Shifts list</div>
+          <div className="w-5/6 max-w-6xl sm:w-3/4 lg:w-1/2 text-xl font-bold">
+            Shifts list
+          </div>
         </div>
         <div className="inline-flex justify-center">
           <ul className="gap-4 w-5/6 max-w-6xl sm:w-3/4 lg:w-1/2">
@@ -34,16 +35,15 @@ const ShiftList = () => {
                   className="bg-white shadow overflow-hidden rounded-md px-6 py-4 my-4 flex flex-row justify-between hover:bg-gray-100"
                 >
                   <div>
-                  <p className="text-base font-medium">
+                    <p className="text-base font-medium">
                       {element.shift_dispatcher}
                     </p>
-                    <p className="text-sm font-normal">
-                        4 mission
-                    </p>
-
+                    <p className="text-sm font-normal">4 mission</p>
                   </div>
                   <div className="">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs md:text:sm font-medium bg-blue-100 text-blue-800">{element.shift_date}</span>
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs md:text:sm font-medium bg-blue-100 text-blue-800">
+                      {element.shift_date}
+                    </span>
                   </div>
                 </li>
               </NavLink>

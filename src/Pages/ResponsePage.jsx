@@ -20,7 +20,7 @@ const ResponsePage = () => {
   return (
     <>
       <NavBar></NavBar>
-      <ProgressBar></ProgressBar>
+      {/* <ProgressBar></ProgressBar> */}
       <div className="flex justify-center gap-4 py-8 sm:px-8 xl:px-0">
         <AnswerForm mission={mission}></AnswerForm>
       </div>

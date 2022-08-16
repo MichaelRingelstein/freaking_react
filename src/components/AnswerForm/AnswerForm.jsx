@@ -6,6 +6,8 @@ import Button from "../UI/Button";
 import instanceAxios from "../../api";
 import Camera from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
+import CameraModal from "./CameraModal";
+import ReactDOM from "react-dom";
 
 const impoundmentList = [
   { id: 1, name: "Pouchet" },
@@ -31,7 +33,7 @@ const AnswerForm = (props) => {
     dropOffs: "",
     pickUps: "",
   });
-  const [photo, setPhoto] = useState("");
+  const [photos, setPhoto] = useState([]);
   const [openCamera, setOpenCamera] = useState(false);
 
   const vehicleIdsChangeHandler = (event) => {
@@ -51,15 +53,26 @@ const AnswerForm = (props) => {
     console.log(event.target.value);
     setAnswer((prevAnswer) => ({ ...prevAnswer, pickUps: event.target.value }));
   };
+
   const handleTakePhoto = (dataUri) => {
-    // Do stuff with the photo...
+    // Do stuff with the photos...
     console.log("takePhoto");
-    setPhoto(dataUri)
-    setOpenCamera(!openCamera)
+    var lat = "";
+    var long = "";
+    navigator.geolocation.getCurrentPosition(function (position) {
+      lat = position.coords.latitude;
+      long = position.coords.longitude;
+      console.log("Latitude is :", lat);
+      console.log("Longitude is :", lat);
+    });
+    console.log(lat)
+    console.log(long)
+    setPhoto((prev) => [...prev, { "img": dataUri, "lat": lat, "long": long }]);
+    setOpenCamera(!openCamera);
   };
   const handleOpenCamera = () => {
-    setOpenCamera(!openCamera)
-  }
+    setOpenCamera(!openCamera);
+  };
 
   const translateStatus = (statusId) => {
     let label = "";
@@ -81,72 +94,74 @@ const AnswerForm = (props) => {
     return { label, style };
   };
 
+  console.log(photos)
+
   return (
     <>
-      <div className="w-5/6 max-w-6xl sm:w-3/4 lg:w-1/2 inline-flex justify-center flex-col">
+      <div className="w-5/6 max-w-6xl sm:w-3/4 lg:w-1/2 justify-center flex-col">
         <form onSubmit={submitAnswerHandler}>
           <Card className="overflow-visible">
-            <div className="bg-teal">
-              <div className="group relative grid grid-cols-6">
-                <div className="min-w-0 col-span-5 aria-hidden">
-                  <div className="pl-4">
-                    <span
-                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs md:text:sm font-medium ${
-                        translateStatus(props.mission.status).style
-                      }`}
-                    >
-                      {translateStatus(props.mission.status).label}
+            <div className="p-6">
+              <span
+                className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs md:text:sm font-medium ${
+                  translateStatus(props.mission.status).style
+                }`}
+              >
+                {translateStatus(props.mission.status).label}
+              </span>
+
+              <div className="grid grid-cols-2 py-2">
+                <div className="col-span-1">
+                  <p className="text-sm font-normal ">
+                    <span className="text-xs font-bold tracking-tight uppercase">
+                      Type:{" "}
+                    </span>{" "}
+                    {props.mission.missionType.name}
+                  </p>
+
+                  <p className="text-sm font-normal">
+                    <span className="text-xs font-bold tracking-tight uppercase">
+                      quantity:{" "}
                     </span>
+                    {props.mission.quantity}
+                  </p>
+                  <p className="text-sm font-normal">
+                    <span className="text-xs font-bold tracking-tight uppercase">
+                      Scooters:{" "}
+                    </span>{" "}
+                    {props.mission.vins}
+                  </p>
+                  <p className="text-sm font-normal">
+                    <span className="text-xs font-bold tracking-tight uppercase">
+                      fleets:{" "}
+                    </span>{" "}
+                    {props.mission.fleet}
+                  </p>
+                </div>
+                <div className="col-span-1 aria-hidden">
+                  <p className="text-sm font-normal">
+                    <span className="text-xs font-bold tracking-tight uppercase">
+                      Pick-up address:{" "}
+                    </span>{" "}
+                    {props.mission.pickUp}
+                  </p>
+                  <p className="text-sm font-normal">
+                    <span className="text-xs font-bold tracking-tight uppercase">
+                      drop-off address:{" "}
+                    </span>{" "}
+                    {props.mission.dropOff}
+                  </p>
 
-                    <p className="text-sm font-normal group-hover:text-gray-500 ">
-                      <span className="text-xs font-bold tracking-tight uppercase">
-                        Type:{" "}
-                      </span>{" "}
-                      {props.mission.missionType.name}
-                    </p>
-
-                    <p className="text-sm font-normal group-hover:text-gray-500">
-                      <span className="text-xs font-bold tracking-tight uppercase">
-                        quantity:{" "}
-                      </span>
-                      {props.mission.quantity}
-                    </p>
-
-                    <p className="text-sm font-normal group-hover:text-gray-500">
-                      <span className="text-xs font-bold tracking-tight uppercase">
-                        Pick-up address:{" "}
-                      </span>{" "}
-                      {props.mission.pickUp}
-                    </p>
-                    <p className="text-sm font-normal group-hover:text-gray-500">
-                      <span className="text-xs font-bold tracking-tight uppercase">
-                        drop-off address:{" "}
-                      </span>{" "}
-                      {props.mission.dropOff}
-                    </p>
-                    <p className="text-sm font-normal group-hover:text-gray-500">
-                      <span className="text-xs font-bold tracking-tight uppercase">
-                        Scooter fleets:{" "}
-                      </span>{" "}
-                      {props.mission.fleet}
-                    </p>
-                    <p className="text-sm font-normal group-hover:text-gray-500">
-                      <span className="text-xs font-bold tracking-tight uppercase">
-                        Comment:{" "}
-                      </span>{" "}
-                      {props.mission.comment}
-                    </p>
-                    <p className="text-sm font-normal group-hover:text-gray-500">
-                      <span className="text-xs font-bold tracking-tight uppercase">
-                        Scooters:{" "}
-                      </span>{" "}
-                      {props.mission.vins}
-                    </p>
-                  </div>
+                  <p className="text-sm font-normal">
+                    <span className="text-xs font-bold tracking-tight uppercase">
+                      Comment:{" "}
+                    </span>{" "}
+                    {props.mission.comment}
+                  </p>
                 </div>
               </div>
             </div>
-            <div className="grid grid-row-2  max-w-md gap-4 px-4 py-5 sm:p-6">
+            <div className="grid grid-row-2 max-w-md gap-4 px-4 py-5 sm:p-6">
               {answer.missionType.id === 4 ? (
                 <>
                   <Dropdown
@@ -160,7 +175,6 @@ const AnswerForm = (props) => {
               ) : (
                 <></>
               )}
-
               <Input
                 labelContent="Scooter numbers"
                 type="text"
@@ -186,14 +200,32 @@ const AnswerForm = (props) => {
                 requiredField={true}
               ></Input>
               <input type="file"></input>
-              <Button onClick={handleOpenCamera}>Take a photo</Button>
-              {openCamera && 
-              <Camera
-                onTakePhoto={(dataUri) => {
-                  handleTakePhoto(dataUri);
-                }}
-              />}
-              <img className="w-20 rounded-md" src={photo}></img>
+              _____ PICKUPS
+              <Button className="w-fit" onClick={handleOpenCamera}>
+                Add a pick-up
+              </Button>
+              {openCamera && (
+                <>
+                  {ReactDOM.createPortal(
+                    <CameraModal handleTakePhoto={handleTakePhoto} />,
+                    document.getElementById("camera")
+                  )}
+                </>
+              )}
+              {console.log(photos.length)}
+              <ul className="flex flex-wrap gap-4">
+                {photos.map((photo, index) => (
+                  <li key={index}>
+                  <img
+                    className="w-24 rounded-md"
+                    src={photo.img}
+                    alt="blabla"
+                    ></img>
+                    <p>{photo.lat + " " + photo.long}</p>
+                    <p>{photo.lat}</p>
+                    </li>
+                ))}
+              </ul>
             </div>
             <div className="py-3 bg-gray-50 text-right px-2 sm:px-6">
               <Button type="submit">Submit</Button>

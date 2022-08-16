@@ -16,12 +16,6 @@ const Input = (props) => {
   return (
     <>
       <div className="relative mt-2">
-        <label
-          htmlFor="name"
-          className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
-        >
-          {props.labelContent}
-        </label>
         <input
           type={props.type}
           name={props.name}
@@ -32,6 +26,12 @@ const Input = (props) => {
         >
           {props.children}
         </input>
+        <label
+          htmlFor="name"
+          className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
+        >
+          {props.labelContent}
+        </label>
       </div>
     </>
   );
