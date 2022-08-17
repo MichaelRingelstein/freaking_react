@@ -11,7 +11,7 @@ import NiceIcon from "../../Badges/Nice.svg";
 
 const navigation = [
   { name: "Shifts", href: "/", current: true },
-  { name: "Calendar", href: "#", current: false },
+  { name: "Calendar", href: "/answer-mission/:missionId", current: false },
 ];
 
 function classNames(...classes) {

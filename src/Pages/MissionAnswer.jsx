@@ -16,7 +16,7 @@ const mission = {
   status: 1,
 };
 
-const ResponsePage = () => {
+const MissionAnswer = () => {
   return (
     <>
       <NavBar></NavBar>
@@ -27,4 +27,4 @@ const ResponsePage = () => {
     </>
   );
 };
-export default ResponsePage;
+export default MissionAnswer;

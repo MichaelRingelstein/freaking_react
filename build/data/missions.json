@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "shift_id": 1,
+    "missionType": { "id": 1, "name": "Rebalancing" },
+    "quantity": "4",
+    "vins": "554, 443",
+    "pickUp": "Rue de la paix",
+    "dropOff": "Rue de la guerre",
+    "fleet": "dispatch",
+    "comment": "déplacer ces scooters",
+    "status": 1
+  },
+  {
+    "id": 2,
+    "shift_id": 1,
+    "missionType": { "id": 2, "name": "blabla" },
+    "quantity": "4",
+    "vins": "554, 443, 234, 1898",
+    "pickUp": "Rue de la A",
+    "dropOff": "Rue de la guerre",
+    "fleet": "dispatch",
+    "comment": "déplacer ces scooters",
+    "status": 2
+  },
+  {
+    "id": 3,
+    "shift_id": 1,
+    "missionType": { "id": 3, "name": "zefr" },
+    "quantity": "4",
+    "vins": "554, 443, 234, 1898",
+    "pickUp": "Rue de la B",
+    "dropOff": "Rue de la guerre",
+    "fleet": "dispatch",
+    "comment": "déplacer ces scooters",
+    "status": 2
+  },
+  {
+    "id": 4,
+    "shift_id": 2,
+    "missionType": { "id": 1, "name": "Rebalancing" },
+    "quantity": "4",
+    "vins": "554, 443, 234, 1898",
+    "pickUp": "Rue de la C",
+    "dropOff": "Rue de la guerre",
+    "fleet": "dispatch",
+    "comment": "déplacer ces scooters",
+    "status": 1
+  },
+  {
+    "id": 5,
+    "shift_id": 2,
+    "missionType": { "id": 2, "name": "blabla" },
+    "quantity": "4",
+    "vins": "554, 443, 234, 1898",
+    "pickUp": "Rue de la paix",
+    "dropOff": "Rue de la guerre",
+    "fleet": "dispatch",
+    "comment": "déplacer ces scooters",
+    "status": 1
+  },
+  {
+    "id": 6,
+    "shift_id": 2,
+    "missionType": { "id": 3, "name": "zefr" },
+    "quantity": "4",
+    "vins": "554, 443, 234, 1898",
+    "pickUp": "Rue de la paix",
+    "dropOff": "Rue de la guerre",
+    "fleet": "dispatch",
+    "comment": "déplacer ces scooters",
+    "status": 1
+  }
+]

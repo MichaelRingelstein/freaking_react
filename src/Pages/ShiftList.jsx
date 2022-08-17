@@ -20,7 +20,7 @@ const ShiftList = () => {
   return (
     <>
       <NavBar></NavBar>
-      <div className="flex flex-col py-8 sm:px-8 xl:px-0">
+      <div className="flex flex-col py-8 sm:px-8 xl:px-0 bg-slate-50">
         <div className="inline-flex justify-center">
           <div className="w-5/6 max-w-6xl sm:w-3/4 lg:w-1/2 text-xl font-bold">
             Shifts list
@@ -51,7 +51,7 @@ const ShiftList = () => {
           </ul>
         </div>
         <div className="text-center">
-          <NavLink to="create-mission">
+          <NavLink to="create-shift">
             <Button>Créer une tournée</Button>
           </NavLink>
         </div>

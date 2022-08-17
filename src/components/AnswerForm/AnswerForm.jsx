@@ -36,6 +36,14 @@ const AnswerForm = (props) => {
   const [photos, setPhoto] = useState([]);
   const [openCamera, setOpenCamera] = useState(false);
 
+  const [img, setImg] = useState();
+
+  const onImageChange = (e) => {
+    const [file] = e.target.files;
+    console.log(e.target.files);
+    setImg(URL.createObjectURL(file));
+  };
+
   const vehicleIdsChangeHandler = (event) => {
     setAnswer((prevAnswer) => ({ ...prevAnswer, vins: event.target.value }));
   };
@@ -65,9 +73,9 @@ const AnswerForm = (props) => {
       console.log("Latitude is :", lat);
       console.log("Longitude is :", lat);
     });
-    console.log(lat)
-    console.log(long)
-    setPhoto((prev) => [...prev, { "img": dataUri, "lat": lat, "long": long }]);
+    console.log(lat);
+    console.log(long);
+    setPhoto((prev) => [...prev, { img: dataUri, lat: lat, long: long }]);
     setOpenCamera(!openCamera);
   };
   const handleOpenCamera = () => {
@@ -94,7 +102,8 @@ const AnswerForm = (props) => {
     return { label, style };
   };
 
-  console.log(photos)
+  console.log(photos);
+  const reader = new FileReader();
 
   return (
     <>
@@ -111,7 +120,7 @@ const AnswerForm = (props) => {
               </span>
 
               <div className="grid grid-cols-2 py-2">
-                <div className="col-span-1">
+                <div className="col-span-2 md:col-span-1">
                   <p className="text-sm font-normal ">
                     <span className="text-xs font-bold tracking-tight uppercase">
                       Type:{" "}
@@ -138,7 +147,7 @@ const AnswerForm = (props) => {
                     {props.mission.fleet}
                   </p>
                 </div>
-                <div className="col-span-1 aria-hidden">
+                <div className="col-span-2 md:col-span-1 aria-hidden">
                   <p className="text-sm font-normal">
                     <span className="text-xs font-bold tracking-tight uppercase">
                       Pick-up address:{" "}
@@ -161,7 +170,7 @@ const AnswerForm = (props) => {
                 </div>
               </div>
             </div>
-            <div className="grid grid-row-2 max-w-md gap-4 px-4 py-5 sm:p-6">
+            <div className="grid auto-rows-auto max-w-md gap-4 px-4 py-5 sm:p-6">
               {answer.missionType.id === 4 ? (
                 <>
                   <Dropdown
@@ -176,19 +185,11 @@ const AnswerForm = (props) => {
                 <></>
               )}
               <Input
-                labelContent="Scooter numbers"
+                labelContent="Scooters moved"
                 type="text"
                 name="vehicle_ids"
                 onChange={vehicleIdsChangeHandler}
                 value={answer.vins}
-                requiredField={true}
-              ></Input>
-              <Input
-                labelContent="Drop-off adress"
-                type="text"
-                name="drop_off"
-                onChange={dropOffsChangeHandler}
-                value={answer.dropOffs}
                 requiredField={true}
               ></Input>
               <Input
@@ -199,9 +200,39 @@ const AnswerForm = (props) => {
                 value={answer.pickUps}
                 requiredField={true}
               ></Input>
-              <input type="file"></input>
+              <Input
+                labelContent="Drop-off adress"
+                type="text"
+                name="drop_off"
+                onChange={dropOffsChangeHandler}
+                value={answer.dropOffs}
+                requiredField={true}
+              ></Input>
+              <div className="inline-flex ">
+                <label
+                  htmlFor="dropzone-file"
+                  className="flex flex-col justify-center items-center w-32 h-16 text-white rounded-lg cursor-pointer hover:bg-bray-800 bg-blue-700  border-blue-600 hover:border-blue-500 hover:bg-blue-600"
+                >
+                  Add pick-up
+                  <input
+                    id="dropzone-file"
+                    className="hidden"
+                    type="file"
+                    onChange={onImageChange}
+                  />
+                </label>
+              </div>
+              <label htmlFor="dropzone-photo"></label>
+              <img
+                id="dropzone-photo"
+                className="w-24 rounded-md"
+                src={img}
+                alt=""
+              />
+              {/* {img ? console.log(reader.readAsDataURL(img)) : console.log("no image")} */}
+              {console.log(img)}
               _____ PICKUPS
-              <Button className="w-fit" onClick={handleOpenCamera}>
+              {/* <Button className="w-fit" onClick={handleOpenCamera}>
                 Add a pick-up
               </Button>
               {openCamera && (
@@ -211,19 +242,19 @@ const AnswerForm = (props) => {
                     document.getElementById("camera")
                   )}
                 </>
-              )}
+              )} */}
               {console.log(photos.length)}
               <ul className="flex flex-wrap gap-4">
                 {photos.map((photo, index) => (
                   <li key={index}>
-                  <img
-                    className="w-24 rounded-md"
-                    src={photo.img}
-                    alt="blabla"
+                    <img
+                      className="w-24 rounded-md"
+                      src={photo.img}
+                      alt="blabla"
                     ></img>
                     <p>{photo.lat + " " + photo.long}</p>
                     <p>{photo.lat}</p>
-                    </li>
+                  </li>
                 ))}
               </ul>
             </div>

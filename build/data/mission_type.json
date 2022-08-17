@@ -1,0 +1,12 @@
+{
+  "missionTypes": [
+    { "id": 1, "name": "Rebalancing" },
+    { "id": 2, "name": "Clusters" },
+    { "id": 3, "name": "Towing" },
+    { "id": 4, "name": "Impoundment dispatch" },
+    { "id": 5, "name": "Out of zone towing" },
+    { "id": 6, "name": "Internal Dispatch" },
+    { "id": 7, "name": "Test" }
+
+  ]
+}
