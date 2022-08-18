@@ -33,15 +33,60 @@ const AnswerForm = (props) => {
     dropOffs: "",
     pickUps: "",
   });
-  const [photos, setPhoto] = useState([]);
+  const [pickUpPhotos, setPickUpPhotos] = useState([]);
+  const [dropOffPhotos, setDropOffPhotos] = useState([]);
   const [openCamera, setOpenCamera] = useState(false);
+  const [comment, setComment] = useState("");
 
-  const [img, setImg] = useState();
+  const getMyPosition = () => {
+    let lat = null;
+    let long = null;
+    return new Promise((resolve) => {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        lat = position.coords.latitude;
+        long = position.coords.longitude;
+        console.log("Latitude is :", lat);
+        console.log("Longitude is :", long);
+        resolve([lat, long]);
+      });
+    });
+  };
 
-  const onImageChange = (e) => {
+  const getPosition = async () => {
+    let coordinates = await getMyPosition();
+    return coordinates;
+  };
+
+  const onPickUpPhotoAdded = (e) => {
     const [file] = e.target.files;
-    console.log(e.target.files);
-    setImg(URL.createObjectURL(file));
+    console.log("Adding a pick up photo");
+    getPosition().then((coordinates) => {
+      console.log(coordinates);
+      setPickUpPhotos((prev) => [
+        ...prev,
+        {
+          img: URL.createObjectURL(file),
+          lat: coordinates[0],
+          long: coordinates[1],
+        },
+      ]);
+    });
+  };
+
+  const onDropOffPhotoAdded = (e) => {
+    const [file] = e.target.files;
+    console.log("Adding a drop off photo");
+    getPosition().then((coordinates) => {
+      console.log(coordinates);
+      setDropOffPhotos((prev) => [
+        ...prev,
+        {
+          img: URL.createObjectURL(file),
+          lat: coordinates[0],
+          long: coordinates[1],
+        },
+      ]);
+    });
   };
 
   const vehicleIdsChangeHandler = (event) => {
@@ -51,31 +96,26 @@ const AnswerForm = (props) => {
     setAnswer((prevAnswer) => ({ ...prevAnswer, impoundment: impoundment }));
   };
   const dropOffsChangeHandler = (event) => {
-    console.log(event.target.value);
+    console.log("changing drop-off address");
     setAnswer((prevAnswer) => ({
       ...prevAnswer,
       dropOffs: event.target.value,
     }));
   };
   const pickUpsChangeHandler = (event) => {
-    console.log(event.target.value);
+    console.log("changing pick-up address");
     setAnswer((prevAnswer) => ({ ...prevAnswer, pickUps: event.target.value }));
   };
 
   const handleTakePhoto = (dataUri) => {
     // Do stuff with the photos...
     console.log("takePhoto");
-    var lat = "";
-    var long = "";
-    navigator.geolocation.getCurrentPosition(function (position) {
-      lat = position.coords.latitude;
-      long = position.coords.longitude;
-      console.log("Latitude is :", lat);
-      console.log("Longitude is :", lat);
-    });
-    console.log(lat);
-    console.log(long);
-    setPhoto((prev) => [...prev, { img: dataUri, lat: lat, long: long }]);
+    var coordinates = getPosition;
+
+    // setPickUpPhotos((prev) => [
+    //   ...prev,
+    //   { img: dataUri, lat: lat, long: long },
+    // ]);
     setOpenCamera(!openCamera);
   };
   const handleOpenCamera = () => {
@@ -102,12 +142,82 @@ const AnswerForm = (props) => {
     return { label, style };
   };
 
-  console.log(photos);
+  console.log(pickUpPhotos);
+  console.log(dropOffPhotos);
+
   const reader = new FileReader();
+
+  const pickUpPhotoButton = (
+    <label
+      htmlFor="pickup-file"
+      className="flex text-center flex-col justify-center items-center w-fit h-fit px-4 py-2 text-white rounded-lg cursor-pointer hover:bg-bray-800 bg-blue-700  border-blue-600 hover:border-blue-500 hover:bg-blue-600"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+        />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+        />
+      </svg>
+      <input
+        id="pickup-file"
+        className="hidden"
+        type="file"
+        onChange={onPickUpPhotoAdded}
+        required
+      />
+    </label>
+  );
+
+  const dropOffPhotoButton = (
+    <label
+      htmlFor="dropoff-file"
+      className="flex text-center flex-col justify-center items-center w-fit h-fit px-4 py-2 text-white rounded-lg cursor-pointer hover:bg-bray-800 bg-blue-700  border-blue-600 hover:border-blue-500 hover:bg-blue-600"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+        />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+        />
+      </svg>
+      <input
+        id="dropoff-file"
+        className="hidden"
+        type="file"
+        onChange={onDropOffPhotoAdded}
+        required
+      />
+    </label>
+  );
 
   return (
     <>
-      <div className="w-5/6 max-w-6xl sm:w-3/4 lg:w-1/2 justify-center flex-col">
+      <div className="w-5/6 max-w-6xl sm:w-3/4 lg:w-1/2 justify-center self-center flex-col">
         <form onSubmit={submitAnswerHandler}>
           <Card className="overflow-visible">
             <div className="p-6">
@@ -192,71 +302,76 @@ const AnswerForm = (props) => {
                 value={answer.vins}
                 requiredField={true}
               ></Input>
-              <Input
-                labelContent="Pick-up adress"
-                type="text"
-                name="pick_up"
-                onChange={pickUpsChangeHandler}
-                value={answer.pickUps}
-                requiredField={true}
-              ></Input>
-              <Input
-                labelContent="Drop-off adress"
-                type="text"
-                name="drop_off"
-                onChange={dropOffsChangeHandler}
-                value={answer.dropOffs}
-                requiredField={true}
-              ></Input>
-              <div className="inline-flex ">
-                <label
-                  htmlFor="dropzone-file"
-                  className="flex flex-col justify-center items-center w-32 h-16 text-white rounded-lg cursor-pointer hover:bg-bray-800 bg-blue-700  border-blue-600 hover:border-blue-500 hover:bg-blue-600"
-                >
-                  Add pick-up
-                  <input
-                    id="dropzone-file"
-                    className="hidden"
-                    type="file"
-                    onChange={onImageChange}
-                  />
-                </label>
+              <div className="flex gap-2 items-end">
+                <div className="grow">
+                  <Input
+                    labelContent="Pick-up adress"
+                    type="text"
+                    name="pick_up"
+                    onChange={pickUpsChangeHandler}
+                    value={answer.pickUps}
+                    requiredField={true}
+                  ></Input>
+                </div>
+                <div>{pickUpPhotoButton}</div>
               </div>
-              <label htmlFor="dropzone-photo"></label>
-              <img
-                id="dropzone-photo"
-                className="w-24 rounded-md"
-                src={img}
-                alt=""
-              />
-              {/* {img ? console.log(reader.readAsDataURL(img)) : console.log("no image")} */}
-              {console.log(img)}
-              _____ PICKUPS
-              {/* <Button className="w-fit" onClick={handleOpenCamera}>
-                Add a pick-up
-              </Button>
-              {openCamera && (
-                <>
-                  {ReactDOM.createPortal(
-                    <CameraModal handleTakePhoto={handleTakePhoto} />,
-                    document.getElementById("camera")
-                  )}
-                </>
-              )} */}
-              {console.log(photos.length)}
-              <ul className="flex flex-wrap gap-4">
-                {photos.map((photo, index) => (
-                  <li key={index}>
-                    <img
-                      className="w-24 rounded-md"
-                      src={photo.img}
-                      alt="blabla"
-                    ></img>
-                    <p>{photo.lat + " " + photo.long}</p>
-                    <p>{photo.lat}</p>
-                  </li>
-                ))}
-              </ul>
+
+              {pickUpPhotos.length > 0 && (
+                <ul className="flex flex-wrap gap-4">
+                  {pickUpPhotos.map((photo, index) => (
+                    <li key={index}>
+                      <img
+                        className="w-24 rounded-md"
+                        src={photo.img}
+                        alt="blabla"
+                      ></img>
+                      <p>
+                        {"latitude: " + photo.lat + " longitude: " + photo.long}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              <div className="flex gap-2 items-end">
+                <div className="grow">
+                  <Input
+                    labelContent="Drop-off adress"
+                    type="text"
+                    name="drop_off"
+                    onChange={dropOffsChangeHandler}
+                    value={answer.dropOffs}
+                    requiredField={true}
+                  ></Input>
+                </div>
+                <div>{dropOffPhotoButton}</div>
+              </div>
+
+              {dropOffPhotos.length > 0 && (
+                <ul className="flex flex-wrap gap-4">
+                  {dropOffPhotos.map((photo, index) => (
+                    <li key={index}>
+                      <img
+                        className="w-24 rounded-md"
+                        src={photo.img}
+                        alt="blabla"
+                      ></img>
+                      <p>
+                        {"latitude: " + photo.lat + " longitude: " + photo.long}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              <Input
+                labelContent="Commentaire"
+                type="text"
+                name="comment"
+                onChange={(e) => setComment(e.target.value)}
+                value={comment}
+                requiredField={true}
+              ></Input>
             </div>
             <div className="py-3 bg-gray-50 text-right px-2 sm:px-6">
               <Button type="submit">Submit</Button>

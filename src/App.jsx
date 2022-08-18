@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import CreateShift from "./Pages/CreateShift";
-import MissionAnswer from "./Pages/MissionAnswer";
-import ShiftDetail from "./Pages/ShiftDetail";
-import ShiftList from "./Pages/ShiftList";
+import CreateShift from "./pages/CreateShift";
+import MissionAnswer from "./pages/MissionAnswer";
+import ShiftDetail from "./pages/ShiftDetail";
+import ShiftList from "./pages/ShiftList";
 
 function App() {
   return (
