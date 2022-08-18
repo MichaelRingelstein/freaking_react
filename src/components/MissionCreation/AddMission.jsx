@@ -4,23 +4,27 @@ import Card from "../UI/Card";
 import Input from "../UI/Input";
 import Dropdown from "../UI/Dropdown";
 import "../../App.css";
-import instanceAxios from "../../api/index"
+import { instanceAxios } from "../../api/index";
+import axios from "axios";
+
+
 
 const AddMission = (props) => {
-  
   const [newMission, setNewMission] = useState({
-    missionType: "",
+    missionType: 1,
     quantity: "",
     vins: "",
     pickUp: "",
     dropOff: "",
     fleet: "",
     comment: "",
+    status: 1
   });
 
   const addMissionHandler = (event) => {
     event.preventDefault();
     props.onAdd(newMission);
+    console.log(newMission)
     setNewMission({
       missionType: "",
       quantity: "",
@@ -29,6 +33,7 @@ const AddMission = (props) => {
       dropOff: "",
       fleet: "",
       comment: "",
+      status: 1
     });
   };
 
@@ -54,19 +59,12 @@ const AddMission = (props) => {
     setNewMission({ ...newMission, comment: event.target.value });
   };
 
-  const [missions, setMissions] = useState("");
-  useEffect(() => {
-    instanceAxios.get("mission_type.json").then((response) => {
-      //console.log(response.data.missionTypes);
-      setMissions(response.data.missionTypes);
-      setNewMission({ ...newMission, missionType: response.data.missionTypes[0]})
-    });
-  }, [props]);
-
+  console.log(newMission)
+  console.log(props.missionTypes)
 
 
   return (
-    <div>
+    <div className="w-full">
       <div className="pb-3 sm:pb-2">
         <h1 className="text-xl font-bold leading-6 text-black ">
           Create a mission
@@ -77,12 +75,11 @@ const AddMission = (props) => {
           <div className="grid grid-cols-6 gap-4 px-4 py-5 sm:p-6">
             <div className="col-span-6 sm:col-span-4">
               <div>
-                {Array.isArray(missions) ? (
+                {Array.isArray(props.missionTypes) ? (
                   <Dropdown
                     label="Mission type"
                     onChange={missionSelectedChangeHandler}
-                    list={missions}
-                    selected={newMission.missionType}
+                    list={props.missionTypes}
                     requiredField={true}
                   />
                 ) : (

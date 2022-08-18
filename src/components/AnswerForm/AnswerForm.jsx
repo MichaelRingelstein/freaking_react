@@ -10,10 +10,10 @@ import CameraModal from "./CameraModal";
 import ReactDOM from "react-dom";
 
 const impoundmentList = [
-  { id: 1, name: "Pouchet" },
-  { id: 2, name: "Louvre" },
-  { id: 3, name: "Saint Ouen" },
-  { id: 4, name: "Boulogne" },
+   "Pouchet",
+   "Louvre",
+   "Saint Ouen",
+   "Boulogne"
 ];
 
 const AnswerForm = (props) => {
@@ -218,68 +218,72 @@ const AnswerForm = (props) => {
   return (
     <>
       <div className="w-5/6 max-w-6xl sm:w-3/4 lg:w-1/2 justify-center self-center flex-col">
-        <form onSubmit={submitAnswerHandler}>
-          <Card className="overflow-visible">
-            <div className="p-6">
-              <span
-                className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs md:text:sm font-medium ${
-                  translateStatus(props.mission.status).style
-                }`}
-              >
-                {translateStatus(props.mission.status).label}
-              </span>
+        <Card>
+          <div className="p-6">
+            <span
+              className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs md:text:sm font-medium ${
+                translateStatus(props.mission.status).style
+              }`}
+            >
+              {translateStatus(props.mission.status).label}
+            </span>
 
-              <div className="grid grid-cols-2 py-2">
-                <div className="col-span-2 md:col-span-1">
-                  <p className="text-sm font-normal ">
-                    <span className="text-xs font-bold tracking-tight uppercase">
-                      Type:{" "}
-                    </span>{" "}
-                    {props.mission.missionType.name}
-                  </p>
+            <div className="grid grid-cols-2 py-2">
+              <div className="col-span-2 md:col-span-1">
+                <p className="text-sm font-normal ">
+                  <span className="text-xs font-bold tracking-tight uppercase">
+                    Type:{" "}
+                  </span>{" "}
+                  {props.mission.missionType.name}
+                </p>
 
-                  <p className="text-sm font-normal">
-                    <span className="text-xs font-bold tracking-tight uppercase">
-                      quantity:{" "}
-                    </span>
-                    {props.mission.quantity}
-                  </p>
-                  <p className="text-sm font-normal">
-                    <span className="text-xs font-bold tracking-tight uppercase">
-                      Scooters:{" "}
-                    </span>{" "}
-                    {props.mission.vins}
-                  </p>
-                  <p className="text-sm font-normal">
-                    <span className="text-xs font-bold tracking-tight uppercase">
-                      fleets:{" "}
-                    </span>{" "}
-                    {props.mission.fleet}
-                  </p>
-                </div>
-                <div className="col-span-2 md:col-span-1 aria-hidden">
-                  <p className="text-sm font-normal">
-                    <span className="text-xs font-bold tracking-tight uppercase">
-                      Pick-up address:{" "}
-                    </span>{" "}
-                    {props.mission.pickUp}
-                  </p>
-                  <p className="text-sm font-normal">
-                    <span className="text-xs font-bold tracking-tight uppercase">
-                      drop-off address:{" "}
-                    </span>{" "}
-                    {props.mission.dropOff}
-                  </p>
+                <p className="text-sm font-normal">
+                  <span className="text-xs font-bold tracking-tight uppercase">
+                    quantity:{" "}
+                  </span>
+                  {props.mission.quantity}
+                </p>
+                <p className="text-sm font-normal">
+                  <span className="text-xs font-bold tracking-tight uppercase">
+                    Scooters:{" "}
+                  </span>{" "}
+                  {props.mission.vins}
+                </p>
+                <p className="text-sm font-normal">
+                  <span className="text-xs font-bold tracking-tight uppercase">
+                    fleets:{" "}
+                  </span>{" "}
+                  {props.mission.fleet}
+                </p>
+              </div>
+              <div className="col-span-2 md:col-span-1 aria-hidden">
+                <p className="text-sm font-normal">
+                  <span className="text-xs font-bold tracking-tight uppercase">
+                    Pick-up address:{" "}
+                  </span>{" "}
+                  {props.mission.pickUp}
+                </p>
+                <p className="text-sm font-normal">
+                  <span className="text-xs font-bold tracking-tight uppercase">
+                    drop-off address:{" "}
+                  </span>{" "}
+                  {props.mission.dropOff}
+                </p>
 
-                  <p className="text-sm font-normal">
-                    <span className="text-xs font-bold tracking-tight uppercase">
-                      Comment:{" "}
-                    </span>{" "}
-                    {props.mission.comment}
-                  </p>
-                </div>
+                <p className="text-sm font-normal">
+                  <span className="text-xs font-bold tracking-tight uppercase">
+                    Comment:{" "}
+                  </span>{" "}
+                  {props.mission.comment}
+                </p>
               </div>
             </div>
+          </div>
+        </Card>
+      </div>
+      <div className="w-5/6 max-w-6xl sm:w-3/4 lg:w-1/2 justify-center self-center flex-col">
+        <form onSubmit={submitAnswerHandler}>
+          <Card className="overflow-visible">
             <div className="grid auto-rows-auto max-w-md gap-4 px-4 py-5 sm:p-6">
               {answer.missionType.id === 4 ? (
                 <>
@@ -287,7 +291,6 @@ const AnswerForm = (props) => {
                     label="Impoundment place"
                     onChange={impoundmentChangeHandler}
                     list={impoundmentList}
-                    selected={answer.impoundment}
                     requiredField={true}
                   ></Dropdown>
                 </>

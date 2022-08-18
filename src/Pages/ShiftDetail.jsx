@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import ShiftMissionList from "../components/ShiftDetail/ShiftMissionList";
 import instanceAxios from "../api";
 import NavBar from "../components/UI/Navbar";
 import CircularButton from "../components/UI/CircularButton";
+
 
 // const shiftData = {
 //   shift_date: "12/08/2021 23:00:00",
@@ -45,6 +46,8 @@ const ShiftDetail = (props) => {
   console.log("start rendering");
   const [missions, setMissions] = useState([]);
   const [generalInformation, setGeneralInformation] = useState(null);
+  const [isAddingMission, setIsAddingMission] = useState(false);
+
   useEffect(() => {
     instanceAxios.get("missions.json").then((response) => {
       setMissions(response.data);
@@ -76,8 +79,11 @@ const ShiftDetail = (props) => {
         ></ShiftMissionList>
       </div>
       <div className="flex justify-center m-auto mb-8">
-        <CircularButton />
+        <NavLink to="add-mission">
+          <CircularButton  />
+        </NavLink>
       </div>
+      <Outlet></Outlet>
     </>
   );
 };

@@ -21,7 +21,7 @@ const MissionAnswer = () => {
     <>
       <NavBar></NavBar>
       {/* <ProgressBar></ProgressBar> */}
-      <div className="flex justify-center gap-4 py-8 sm:px-8 xl:px-0">
+      <div className="flex flex-col justify-center gap-4 py-8 sm:px-8 xl:px-0">
         <AnswerForm mission={mission}></AnswerForm>
       </div>
     </>

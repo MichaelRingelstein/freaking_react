@@ -77,7 +77,7 @@ const ShiftSummary = (props) => {
                             </div>
                           <p className="truncate">
                             {" "}
-                            <b>Type :</b> {mission.missionType.name}
+                            <b>Type :</b> {mission.missionTypeID}
                           </p>
                           <div className="flex-col flex-wrap">
                             <div>
