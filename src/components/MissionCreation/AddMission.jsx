@@ -6,51 +6,66 @@ import Dropdown from "../UI/Dropdown";
 import "../../App.css";
 import { instanceAxios } from "../../api/index";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
-
+const impoundmentList = [
+  { id: 1, label: "Pouchet" },
+  { id: 2, label: "Louvre" },
+  { id: 3, label: "Saint Ouen" },
+  { id: 4, label: "Boulogne" },
+];
 
 const AddMission = (props) => {
+  const missionTypes = useSelector((state) => state.missionTypes.value);
+
   const [newMission, setNewMission] = useState({
-    missionType: 1,
+    shift_id: "",
+    mission_type: 1,
     quantity: "",
-    vins: "",
-    pickUp: "",
-    dropOff: "",
-    fleet: "",
+    scooters: "",
+    pickup_address: "",
+    dropoff_address: "",
     comment: "",
-    status: 1
+    fleet: "",
+    status: 1,
   });
 
   const addMissionHandler = (event) => {
     event.preventDefault();
     props.onAdd(newMission);
-    console.log(newMission)
+    console.log(newMission);
     setNewMission({
-      missionType: "",
+      mission_type: "",
       quantity: "",
-      vins: "",
-      pickUp: "",
-      dropOff: "",
+      scooters: "",
+      pickup_address: "",
+      dropoff_address: "",
       fleet: "",
       comment: "",
-      status: 1
+      status: 1,
     });
   };
 
   const missionSelectedChangeHandler = (mission) => {
-    setNewMission({ ...newMission, missionType: mission });
+    console.log(mission);
+    setNewMission({ ...newMission, mission_type: mission.id });
   };
+
+  const impoundmentSelectedChangeHandler = (event) => {
+    setNewMission({ ...newMission, impoundment: event });
+  };
+
   const quantityChangeHandler = (event) => {
     setNewMission({ ...newMission, quantity: event.target.value });
   };
   const vehicleIdsChangeHandler = (event) => {
-    setNewMission({ ...newMission, vins: event.target.value });
+    setNewMission({ ...newMission, scooters: event.target.value });
   };
   const pickUpAdressChangeHandler = (event) => {
-    setNewMission({ ...newMission, pickUp: event.target.value });
+    setNewMission({ ...newMission, pickup_address: event.target.value });
   };
   const dropOffAdressChangeHandler = (event) => {
-    setNewMission({ ...newMission, dropOff: event.target.value });
+    setNewMission({ ...newMission, dropoff_address: event.target.value });
   };
   const fleetChangeHandler = (event) => {
     setNewMission({ ...newMission, fleet: event.target.value });
@@ -59,9 +74,14 @@ const AddMission = (props) => {
     setNewMission({ ...newMission, comment: event.target.value });
   };
 
-  console.log(newMission)
-  console.log(props.missionTypes)
+  //transform missionTypes object in an array
+  const types = [];
+  if (missionTypes) {
+    Object.keys(missionTypes).map((key) => types.push(missionTypes[key]));
+  }
+  console.log("types : ", types);
 
+  console.log(newMission);
 
   return (
     <div className="w-full">
@@ -71,15 +91,15 @@ const AddMission = (props) => {
         </h1>
       </div>
       <form onSubmit={addMissionHandler}>
-        <Card className="">
+        <Card className="bg-white ">
           <div className="grid grid-cols-6 gap-4 px-4 py-5 sm:p-6">
-            <div className="col-span-6 sm:col-span-4">
+            <div className="col-span-6">
               <div>
-                {Array.isArray(props.missionTypes) ? (
+                {types.length > 0 ? (
                   <Dropdown
                     label="Mission type"
                     onChange={missionSelectedChangeHandler}
-                    list={props.missionTypes}
+                    list={types}
                     requiredField={true}
                   />
                 ) : (
@@ -87,6 +107,21 @@ const AddMission = (props) => {
                 )}
               </div>
             </div>
+            {newMission.mission_type === 5 ? (
+              <div className="col-span-6">
+                <div>
+                  <Dropdown
+                    label="Impoundment"
+                    onChange={impoundmentSelectedChangeHandler}
+                    list={impoundmentList}
+                    requiredField={true}
+                  />
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
+
             <div className="col-span-6 sm:col-span-3">
               <Input
                 labelContent="Quantité"
@@ -103,7 +138,7 @@ const AddMission = (props) => {
                 type="text"
                 name="vehicle_ids"
                 onChange={vehicleIdsChangeHandler}
-                value={newMission.vins}
+                value={newMission.scooters}
                 requiredField={true}
               ></Input>
             </div>
@@ -113,7 +148,7 @@ const AddMission = (props) => {
                 type="text"
                 name="pick_up"
                 onChange={pickUpAdressChangeHandler}
-                value={newMission.pickUp}
+                value={newMission.pickup_address}
                 requiredField={true}
               ></Input>
             </div>
@@ -123,7 +158,7 @@ const AddMission = (props) => {
                 type="text"
                 name="drop_off"
                 onChange={dropOffAdressChangeHandler}
-                value={newMission.dropOff}
+                value={newMission.dropoff_address}
                 requiredField={true}
               ></Input>
             </div>
@@ -149,7 +184,9 @@ const AddMission = (props) => {
             </div>
           </div>
           <div className="py-3 bg-gray-50 text-right px-2 sm:px-6">
-            <Button type="submit">Add Mission</Button>
+            <Button type="submit" style="primary">
+              Add Mission
+            </Button>
           </div>
         </Card>
       </form>

@@ -11,7 +11,7 @@ import NiceIcon from "../../Badges/Nice.svg";
 
 const navigation = [
   { name: "Shifts", href: "/", current: true },
-  { name: "Calendar", href: "/answer-mission/:missionId", current: false },
+  { name: "Map", href: "/answer-mission/:missionId", current: false },
 ];
 
 function classNames(...classes) {
@@ -39,7 +39,7 @@ const citiesAtributes = [
 
 const NavBar = () => {
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-gray-800 sticky top-0 w-full z-10">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -59,20 +59,20 @@ const NavBar = () => {
                 <div className="flex-shrink-0 flex items-center">
                   <img
                     className="block lg:hidden h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=500"
+                    src="https://tailwindui.com/img/logos/workflow-mark.svg?color=blue&shade=500"
                     alt="logo"
                   />
                   <img
                     className="hidden lg:block h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=500"
+                    src="https://tailwindui.com/img/logos/workflow-mark.svg?color=blue&shade=500"
                     alt="logo"
                   />
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
-                    {navigation.map((item) => (
+                    {navigation.map((item, index) => (
                       <a
-                        key={item.name}
+                        key={index}
                         href={item.href}
                         className={classNames(
                           item.current
@@ -103,9 +103,9 @@ const NavBar = () => {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {navigation.map((item) => (
+              {navigation.map((item, index) => (
                 <Disclosure.Button
-                  key={item.name}
+                  key={index}
                   as="a"
                   href={item.href}
                   className={classNames(

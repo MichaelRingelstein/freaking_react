@@ -3,9 +3,13 @@ import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import { useNavigate } from "react-router-dom";
+import { translateMissionStatus } from "../../hooks/translateStatus";
+import { translateMissionType } from "../../hooks/translateMissionType";
+import { useSelector } from "react-redux";
 
 const ShiftSummary = (props) => {
   let navigate = useNavigate();
+  const missionTypes = useSelector((state) => state.missionTypes.value);
 
   const shiftDateChangeHandler = (event) => {
     props.shiftInformationHandler({
@@ -35,10 +39,10 @@ const ShiftSummary = (props) => {
     <div className="grid auto-rows-min w-full">
       <div className="pb-3 sm:pb-2">
         <h1 className="text-xl font-bold leading-6 text-black ">
-          Shift summary
+          Shift recap
         </h1>
       </div>
-      <Card className="">
+      <Card className="bg-white ">
         <form onSubmit={shiftInformationFormHandle}>
           <div className="grid grid-cols-6 gap-4 px-4 py-5 sm:p-6">
             <div className="col-span-6 xl:col-span-3">
@@ -77,7 +81,7 @@ const ShiftSummary = (props) => {
                             </div>
                           <p className="truncate">
                             {" "}
-                            <b>Type :</b> {mission.missionTypeID}
+                            <b>Type :</b> {translateMissionType(mission.mission_type, missionTypes)}
                           </p>
                           <div className="flex-col flex-wrap">
                             <div>
@@ -88,19 +92,19 @@ const ShiftSummary = (props) => {
                             <div>
                               <p>
                                 {" "}
-                                <b>VINs :</b> {mission.vins}
+                                <b>VINs :</b> {mission.scooters}
                               </p>
                             </div>
                             <div>
                               <p>
                                 {" "}
-                                <b>Pick-up address :</b> {mission.pickUp}
+                                <b>Pick-up address :</b> {mission.pickup_address}
                               </p>
                             </div>
                             <div>
                               <p>
                                 {" "}
-                                <b>Drop-off address :</b> {mission.dropOff}
+                                <b>Drop-off address :</b> {mission.drop_off_address}
                               </p>
                             </div>
                             <div>
@@ -143,7 +147,7 @@ const ShiftSummary = (props) => {
                 </ul>
               </div>
               <div className="py-3 bg-gray-50 text-right px-2 sm:px-6">
-                <Button type="submit">Send</Button>
+                <Button type="submit" style="primary">Send</Button>
               </div>
             </>
           )}
